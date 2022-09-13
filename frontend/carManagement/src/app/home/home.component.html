@@ -18,5 +18,52 @@
         </div>
       </div>
     </div>
+    <div class="col">
+      <form novalidate>
+        <div class="mb-3">
+          <label for="brand" class="form-label">Marca</label>
+          <input
+            type="text"
+            class="form-control"
+            id="brand"
+            formControlName="brand"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="model" class="form-label">Modelo</label>
+          <input
+            type="text"
+            class="form-control"
+            id="model"
+            formControlName="model"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="price" class="form-label">Preço</label>
+          <input
+            type="number"
+            class="form-control"
+            id="price"
+            formControlName="price"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="img" class="form-label">Imagem</label>
+          <input
+            type="text"
+            class="form-control"
+            id="img"
+            formControlName="img"
+          />
+        </div>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="carForm.invalid"
+        >
+          Adicionar
+        </button>
+      </form>
+    </div>
   </div>
 </div>
