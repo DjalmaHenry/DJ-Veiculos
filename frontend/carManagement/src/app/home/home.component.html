@@ -20,49 +20,18 @@
     </div>
     <div class="col">
       <form novalidate>
-        <div class="mb-3">
-          <label for="brand" class="form-label">Marca</label>
-          <input
-            type="text"
-            class="form-control"
-            id="brand"
-            formControlName="brand"
-          />
-        </div>
-        <div class="mb-3">
-          <label for="model" class="form-label">Modelo</label>
-          <input
-            type="text"
-            class="form-control"
-            id="model"
-            formControlName="model"
-          />
-        </div>
-        <div class="mb-3">
-          <label for="price" class="form-label">Preço</label>
-          <input
-            type="number"
-            class="form-control"
-            id="price"
-            formControlName="price"
-          />
-        </div>
-        <div class="mb-3">
-          <label for="img" class="form-label">Imagem</label>
-          <input
-            type="text"
-            class="form-control"
-            id="img"
-            formControlName="img"
-          />
-        </div>
-        <button
-          type="submit"
-          class="btn btn-primary"
-          [disabled]="carForm.invalid"
-        >
-          Adicionar
-        </button>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Email</mat-label>
+          <input type="email" matInput placeholder="Ex. pat@example.com" />
+          <mat-error
+            *ngIf="formCar.hasError('email') && !formCar.hasError('required')"
+          >
+            Please enter a valid email address
+          </mat-error>
+          <mat-error *ngIf="formCar.hasError('required')">
+            Email is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
       </form>
     </div>
   </div>

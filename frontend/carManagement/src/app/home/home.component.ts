@@ -12,13 +12,13 @@ export class HomeComponent implements OnInit {
 
   cars: Car[] = [];
 
-  carForm: FormGroup | any;
+  formCar: FormGroup | any;
 
   constructor(private carService: CarService) { }
 
   ngOnInit(): void {
 
-    this.carForm = new FormGroup({
+    this.formCar = new FormGroup({
       id: new FormControl(''),
       name: new FormControl('', [Validators.required]),
       model: new FormControl('', [Validators.required]),
