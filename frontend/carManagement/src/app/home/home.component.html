@@ -1,6 +1,6 @@
-<div class="container mt-3">
+<div class="container-fluid mt-3">
   <div class="row">
-    <div *ngFor="let car of cars" class="col-4">
+    <div *ngFor="let car of cars; index as i" class="col-4">
       <div class="card mb-2" style="width: 20rem">
         <div class="row">
           <div class="col">
@@ -10,6 +10,9 @@
               <p class="card-subtitle mb-2 fs-5">{{ car.model }}</p>
               <p class="fs-6">Preço</p>
               <p class="fs-6">R${{ car.price }}</p>
+              <button (click)="deleteCar(i)" class="btn btn-danger btn-small">
+                <mat-icon>restore_from_trash</mat-icon>
+              </button>
             </div>
           </div>
           <div class="col">
@@ -18,21 +21,144 @@
         </div>
       </div>
     </div>
+    <!-- formulario -->
     <div class="col-12">
-      <form novalidate>
-        <mat-form-field class="example-full-width" appearance="fill">
-          <mat-label>Email</mat-label>
-          <input type="email" matInput placeholder="Ex. pat@example.com" />
-          <mat-error
-            *ngIf="formCar.hasError('email') && !formCar.hasError('required')"
-          >
-            Please enter a valid email address
-          </mat-error>
-          <mat-error *ngIf="formCar.hasError('required')">
-            Email is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-      </form>
+      <div class="card">
+        <div class="card-body">
+          <form novalidate [formGroup]="formCar">
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Marca</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="BMW"
+                formControlName="brand"
+              />
+              <mat-error
+                *ngIf="
+                  formCar.hasError('brand') && !formCar.hasError('required')
+                "
+              >
+                Erro
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Modelo</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="A4"
+                formControlName="model"
+              />
+              <mat-error
+                *ngIf="
+                  formCar.hasError('model') && !formCar.hasError('required')
+                "
+              >
+                Erro
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Ano</mat-label>
+              <input
+                type="number"
+                matInput
+                placeholder="1855"
+                formControlName="year"
+              />
+              <mat-error
+                *ngIf="
+                  formCar.hasError('year') && !formCar.hasError('required')
+                "
+              >
+                Erro
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Preco</mat-label>
+              <input
+                type="number"
+                matInput
+                placeholder="R$55"
+                formControlName="price"
+              />
+              <mat-error
+                *ngIf="
+                  formCar.hasError('price') && !formCar.hasError('required')
+                "
+              >
+                Erro
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Cor</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Azul"
+                formControlName="color"
+              />
+              <mat-error
+                *ngIf="
+                  formCar.hasError('color') && !formCar.hasError('required')
+                "
+              >
+                Erro
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Descricao</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="rapido"
+                formControlName="description"
+              />
+              <mat-error
+                *ngIf="
+                  formCar.hasError('description') &&
+                  !formCar.hasError('required')
+                "
+              >
+                erro
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Velocidade</mat-label>
+              <input
+                type="email"
+                matInput
+                placeholder="55"
+                formControlName="velocity"
+              />
+              <mat-error
+                *ngIf="
+                  formCar.hasError('velocity') && !formCar.hasError('required')
+                "
+              >
+                Erro
+              </mat-error>
+            </mat-form-field>
+
+            <label for="myfile">Select a file:</label>
+            <input
+              type="file"
+              id="myfile"
+              name="myfile"
+              formControlName="img"
+              (change)="onFileSelected($event)"
+            />
+
+            <button
+              [disabled]="!formCar.valid"
+              (click)="formControl()"
+              class="btn btn-primary"
+            >
+              Salvar
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 </div>

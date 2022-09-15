@@ -19,17 +19,52 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
 
     this.formCar = new FormGroup({
-      id: new FormControl(''),
-      name: new FormControl('', [Validators.required]),
+      brand: new FormControl('', [Validators.required]),
       model: new FormControl('', [Validators.required]),
       year: new FormControl('', [Validators.required]),
-      color: new FormControl('', [Validators.required]),
       price: new FormControl('', [Validators.required]),
+      color: new FormControl('', [Validators.required]),
       description: new FormControl('', [Validators.required]),
+      img: new FormControl(''),
+      velocity: new FormControl('', [Validators.required]),
     });
     this.carService.getCars().subscribe((cars: Car[]) => {
       this.cars = cars;
     })
   }
 
+  formControl() {
+    console.log(this.formCar.value);
+    this.cars.push(this.formCar.value);
+    this.carService.postCar(this.formCar.value).subscribe((car: Car) => {
+      console.log(car);
+    }
+    );
+
+  }
+
+  deleteCar(i: number) {
+    this.cars.splice(i, 1);
+  }
+
+  onFileSelected(event: any) {
+    const reader = new FileReader();
+
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+
+        // this.imageSrc = reader.result as string;
+
+        this.formCar.patchValue({
+          img: reader.result
+        });
+
+      };
+
+    }
+
+  }
 }

@@ -1,59 +1,59 @@
 {
-    "cars": [
-      {
-        "id": 1,
-        "brand": " BMW ",
-        "model": "M3",
-        "year": 2015,
-        "price": 20000,
-        "color": "red",
-        "description": "BMW 3 2015",
-        "img": "../assets/img/cars/BMW-E39-M5.png",
-        "velocity": 200   
-      },
-      {
-        "id": 2,
-        "brand": " BMW ",
-        "model": "M5",
-        "year": 2016,
-        "price": 30000,
-        "color": "red",
-        "description": "BMW 5 2016",
-        "img": "../assets/img/cars/BMW-E39-M5.png",
-        "velocity": 200   
-      },
-      {
-        "id": 3,
-        "brand": " BMW ",
-        "model": "M6",
-        "year": 2017,
-        "price": 40000,
-        "color": "red",
-        "description": "BMW 6 2017",
-        "img": "../assets/img/cars/BMW-E39-M5.png",
-        "velocity": 200   
-      },
-      {
-        "id": 4,
-        "brand": " BMW ",
-        "model": "M7",
-        "year": 2018,
-        "price": 50000,
-        "color": "red",
-        "description": "BMW 7 2018",
-        "img": "../assets/img/cars/BMW-E39-M5.png",
-        "velocity": 200   
-      },
-      {
-        "id": 5,
-        "brand": " BMW ",
-        "model": "M8",
-        "year": 2019,
-        "price": 60000,
-        "color": "red",
-        "description": "BMW 8 2019",
-        "img": "../assets/img/cars/BMW-E39-M5.png",
-        "velocity": 200   
-      } 
-    ]
-} 
+  "cars": [
+    {
+      "id": 1,
+      "brand": " BMW ",
+      "model": "M3",
+      "year": 2015,
+      "price": 20000,
+      "color": "red",
+      "description": "BMW 3 2015",
+      "img": "../assets/img/cars/BMW-E39-M5.png",
+      "velocity": 200
+    },
+    {
+      "id": 2,
+      "brand": " BMW ",
+      "model": "M5",
+      "year": 2016,
+      "price": 30000,
+      "color": "red",
+      "description": "BMW 5 2016",
+      "img": "../assets/img/cars/BMW-E39-M5.png",
+      "velocity": 200
+    },
+    {
+      "id": 3,
+      "brand": " BMW ",
+      "model": "M6",
+      "year": 2017,
+      "price": 40000,
+      "color": "red",
+      "description": "BMW 6 2017",
+      "img": "../assets/img/cars/BMW-E39-M5.png",
+      "velocity": 200
+    },
+    {
+      "id": 4,
+      "brand": " BMW ",
+      "model": "M7",
+      "year": 2018,
+      "price": 50000,
+      "color": "red",
+      "description": "BMW 7 2018",
+      "img": "../assets/img/cars/BMW-E39-M5.png",
+      "velocity": 200
+    },
+    {
+      "id": 5,
+      "brand": " BMW ",
+      "model": "M8",
+      "year": 2019,
+      "price": 60000,
+      "color": "red",
+      "description": "BMW 8 2019",
+      "img": "../assets/img/cars/BMW-E39-M5.png",
+      "velocity": 200
+    }
+  ]
+}
