@@ -11,7 +11,10 @@
               <p class="fs-6">Preço</p>
               <p class="fs-6">R${{ car.price }}</p>
               <button (click)="deleteCar(i)" class="btn btn-danger btn-small">
-                <mat-icon>restore_from_trash</mat-icon>
+                <i class="fa fa-trash-o" aria-hidden="true"></i>
+              </button>
+              <button data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="editCar(i)" class="mx-3 btn btn-primary btn-small">
+                <i class="fa fa-pencil" aria-hidden="true"></i>
               </button>
             </div>
           </div>
@@ -21,144 +24,120 @@
         </div>
       </div>
     </div>
-    <!-- formulario -->
-    <div class="col-12">
-      <div class="card">
-        <div class="card-body">
-          <form novalidate [formGroup]="formCar">
-            <mat-form-field class="example-full-width" appearance="fill">
-              <mat-label>Marca</mat-label>
-              <input
-                type="text"
-                matInput
-                placeholder="BMW"
-                formControlName="brand"
-              />
-              <mat-error
-                *ngIf="
-                  formCar.hasError('brand') && !formCar.hasError('required')
-                "
-              >
-                Erro
-              </mat-error>
-            </mat-form-field>
-            <mat-form-field class="example-full-width" appearance="fill">
-              <mat-label>Modelo</mat-label>
-              <input
-                type="text"
-                matInput
-                placeholder="A4"
-                formControlName="model"
-              />
-              <mat-error
-                *ngIf="
-                  formCar.hasError('model') && !formCar.hasError('required')
-                "
-              >
-                Erro
-              </mat-error>
-            </mat-form-field>
-            <mat-form-field class="example-full-width" appearance="fill">
-              <mat-label>Ano</mat-label>
-              <input
-                type="number"
-                matInput
-                placeholder="1855"
-                formControlName="year"
-              />
-              <mat-error
-                *ngIf="
-                  formCar.hasError('year') && !formCar.hasError('required')
-                "
-              >
-                Erro
-              </mat-error>
-            </mat-form-field>
-            <mat-form-field class="example-full-width" appearance="fill">
-              <mat-label>Preco</mat-label>
-              <input
-                type="number"
-                matInput
-                placeholder="R$55"
-                formControlName="price"
-              />
-              <mat-error
-                *ngIf="
-                  formCar.hasError('price') && !formCar.hasError('required')
-                "
-              >
-                Erro
-              </mat-error>
-            </mat-form-field>
-            <mat-form-field class="example-full-width" appearance="fill">
-              <mat-label>Cor</mat-label>
-              <input
-                type="text"
-                matInput
-                placeholder="Azul"
-                formControlName="color"
-              />
-              <mat-error
-                *ngIf="
-                  formCar.hasError('color') && !formCar.hasError('required')
-                "
-              >
-                Erro
-              </mat-error>
-            </mat-form-field>
-            <mat-form-field class="example-full-width" appearance="fill">
-              <mat-label>Descricao</mat-label>
-              <input
-                type="text"
-                matInput
-                placeholder="rapido"
-                formControlName="description"
-              />
-              <mat-error
-                *ngIf="
-                  formCar.hasError('description') &&
-                  !formCar.hasError('required')
-                "
-              >
-                erro
-              </mat-error>
-            </mat-form-field>
-            <mat-form-field class="example-full-width" appearance="fill">
-              <mat-label>Velocidade</mat-label>
-              <input
-                type="email"
-                matInput
-                placeholder="55"
-                formControlName="velocity"
-              />
-              <mat-error
-                *ngIf="
-                  formCar.hasError('velocity') && !formCar.hasError('required')
-                "
-              >
-                Erro
-              </mat-error>
-            </mat-form-field>
+    <!-- formulario modal -->
 
-            <label for="myfile">Select a file:</label>
-            <input
-              type="file"
-              id="myfile"
-              name="myfile"
-              formControlName="img"
-              (change)="onFileSelected($event)"
-            />
+    <button (click)="addCar()" type="button" class="btn btn-primary col-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+      Adicionar carro
+    </button>
 
-            <button
-              [disabled]="!formCar.valid"
-              (click)="formControl()"
-              class="btn btn-primary"
-            >
+
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Adição de carro</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form novalidate [formGroup]="formCar">
+                  <div class="row">
+                    <div class="col">
+                  <mat-form-field class="input-custom-pb mr-1" appearance="outline">
+                    <mat-label>Marca</mat-label>
+                    <input type="text" matInput placeholder="BMW" formControlName="brand" />
+                    <mat-error *ngIf="
+                          formCar.hasError('brand') && !formCar.hasError('required')
+                        ">
+                      Erro
+                    </mat-error>
+                  </mat-form-field>
+                    </div>
+                    <div class="col">
+
+                      <mat-form-field class="input-custom-pb" appearance="outline">
+                        <mat-label>Modelo</mat-label>
+                        <input type="text" matInput placeholder="A4" formControlName="model" />
+                        <mat-error *ngIf="
+                              formCar.hasError('model') && !formCar.hasError('required')
+                            ">
+                          Erro
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col">
+                  <mat-form-field class="input-custom-pb" appearance="outline">
+                    <mat-label>Ano</mat-label>
+                    <input type="number" matInput placeholder="1855" formControlName="year" />
+                    <mat-error *ngIf="
+                          formCar.hasError('year') && !formCar.hasError('required')
+                        ">
+                      Erro
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="input-custom-pb" appearance="outline">
+                    <mat-label>Preco</mat-label>
+                    <input type="number" matInput placeholder="R$55" formControlName="price" />
+                    <mat-error *ngIf="
+                          formCar.hasError('price') && !formCar.hasError('required')
+                        ">
+                      Erro
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="input-custom-pb" appearance="outline">
+                    <mat-label>Cor</mat-label>
+                    <input type="text" matInput placeholder="Azul" formControlName="color" />
+                    <mat-error *ngIf="
+                          formCar.hasError('color') && !formCar.hasError('required')
+                        ">
+                      Erro
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="input-custom-pb" appearance="outline">
+                    <mat-label>Descricao</mat-label>
+                    <input type="text" matInput placeholder="rapido" formControlName="description" />
+                    <mat-error *ngIf="
+                          formCar.hasError('description') &&
+                          !formCar.hasError('required')
+                        ">
+                      erro
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="input-custom-pb rounded" appearance="outline">
+                    <mat-label>Velocidade</mat-label>
+                    <input type="email" matInput placeholder="55" formControlName="velocity" />
+                    <mat-error *ngIf="
+                          formCar.hasError('velocity') && !formCar.hasError('required')
+                        ">
+                      Erro
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <input class="d-none" id="uploadImg" type="file" formControlName="img" accept="image/*" (change)="onFileSelected($event)" />
+                  <button type="button" class="btn mx-2 btn-primary" (click)="changeAvatar()">Adicionar imagem</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button  type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            <button [disabled]="!formCar.valid" (click)="formControl()" class="btn btn-primary">
               Salvar
             </button>
-          </form>
+          </div>
         </div>
       </div>
     </div>
+
+
   </div>
 </div>

@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Car } from '../models/car.model';
+import { catchError, take, throwError } from 'rxjs';
 import { CarService } from '../services/car.service';
+import { Car } from './../models/car.model';
+
 
 @Component({
   selector: 'app-home',
@@ -14,7 +16,7 @@ export class HomeComponent implements OnInit {
 
   formCar: FormGroup | any;
 
-  constructor(private carService: CarService) { }
+  constructor(private carService: CarService, private detectorChanges: ChangeDetectorRef) { }
 
   ngOnInit(): void {
 
@@ -47,24 +49,54 @@ export class HomeComponent implements OnInit {
     this.cars.splice(i, 1);
   }
 
-  onFileSelected(event: any) {
-    const reader = new FileReader();
+  editCar(i: number) {
+    this.fillForm(this.cars[i])
+  }
 
-    if (event.target.files && event.target.files.length) {
-      const [file] = event.target.files;
-      reader.readAsDataURL(file);
+  addCar(){
+    this.formCar.reset()
+  }
 
-      reader.onload = () => {
+  fillForm(data: Car){
+    this.formCar.patchValue({
+      brand: data.brand,
+      model: data.model,
+      year: data.year ,
+      price: data.price,
+      color: data.color,
+      description: data.description,
+      img: data.img,
+      velocity: data.velocity
+    })
+  }
 
-        // this.imageSrc = reader.result as string;
+  onFileSelected(e: any) {
+    const file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
+    const pattern = /image-*/;
+    if (!file || !file.type.match(pattern)) return;
 
-        this.formCar.patchValue({
-          img: reader.result
-        });
+    const maxAvatarImage = 2;
+    if (Math.round(file.size / 1024) >= maxAvatarImage * 1000) return;
 
-      };
+    this.carService
+      .compress(file)
+      .pipe(
+        take(1),
+        catchError((event) => {
+          return throwError(event);
+        })
+      )
+      .subscribe((response) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(response);
+        reader.onload = () => {
+          this.formCar.get('img').setValue(reader.result as string);
+          this.detectorChanges.detectChanges();
+        };
+      });
+  }
 
-    }
-
+  changeAvatar(){
+    document.getElementById('uploadImg')?.click();
   }
 }

@@ -1,7 +1,12 @@
-import { Injectable, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Injectable, NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { HomeComponent } from './home.component';
+
+
+
 
 
 @Injectable({
@@ -9,10 +14,13 @@ import { HomeComponent } from './home.component';
 })
 
 @NgModule({
-  declarations: [],
+  declarations: [HomeComponent],
   imports: [
     CommonModule,
-    MatInputModule
+    MatInputModule,
+    MatIconModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
-export class HomeModule { }
+export class HomeModule {}
