@@ -124,8 +124,7 @@
                   </mat-form-field>
                 </div>
                 <div class="col">
-                  <input class="d-none" id="uploadImg" type="file" formControlName="img"
-                    (change)="onFileSelected($event)" />
+                  <!-- <input class="d-none" id="uploadImg" type="file" formControlName="img" /> -->
                   <button type="button" class="btn mx-2 btn-primary" (click)="changeAvatar()">Adicionar imagem</button>
                 </div>
               </div>
@@ -133,7 +132,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-            <button [disabled]="!formCar.valid" (click)="formControl()" class="btn btn-primary">
+            <button [disabled]="!formCar.valid" (click)="saveCarForm()" data-bs-dismiss="modal" class="btn btn-primary">
               Salvar
             </button>
           </div>

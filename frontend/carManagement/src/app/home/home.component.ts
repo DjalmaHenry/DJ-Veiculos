@@ -14,7 +14,11 @@ export class HomeComponent implements OnInit {
 
   cars: Car[] = [];
 
+  isEdit: boolean = false;
+
   formCar: FormGroup | any;
+
+  atualIndex: number = 0;
 
   constructor(private carService: CarService, private detectorChanges: ChangeDetectorRef) { }
 
@@ -35,14 +39,23 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  formControl() {
-    console.log(this.formCar.value);
-    this.cars.push(this.formCar.value);
-    this.carService.postCar(this.formCar.value).subscribe((car: Car) => {
-      console.log(car);
+  saveCarForm() {
+    const dataCar: Car = this.formCar.value;
+    if (!this.isEdit) {
+      this.carService.postCar(dataCar).subscribe((car: Car) => {
+        this.cars.push(car);
+      }
+      );
+      return
+    }
+    console.log(dataCar);
+    dataCar.id = this.cars[this.atualIndex].id;
+    this.carService.putCar(dataCar).subscribe((car: Car) => {
+
+      const index = this.cars.findIndex((c: Car) => c.id === car.id);
+      this.cars[index] = car;
     }
     );
-
   }
 
   deleteCar(i: number) {
@@ -50,18 +63,21 @@ export class HomeComponent implements OnInit {
   }
 
   editCar(i: number) {
+    this.atualIndex = i;
+    this.isEdit = true;
     this.fillForm(this.cars[i])
   }
 
-  addCar(){
+  addCar() {
+    this.isEdit = false;
     this.formCar.reset()
   }
 
-  fillForm(data: Car){
+  fillForm(data: Car) {
     this.formCar.patchValue({
       brand: data.brand,
       model: data.model,
-      year: data.year ,
+      year: data.year,
       price: data.price,
       color: data.color,
       description: data.description,
@@ -96,7 +112,7 @@ export class HomeComponent implements OnInit {
       });
   }
 
-  changeAvatar(){
+  changeAvatar() {
     document.getElementById('uploadImg')?.click();
   }
 }
