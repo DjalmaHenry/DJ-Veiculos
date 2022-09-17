@@ -1,38 +1,42 @@
-<div class="container-fluid mt-3">
+<div class="container-fluid ">
   <div class="row">
-    <div *ngFor="let car of cars; index as i" class="col-4">
-      <div class="card mb-2" style="width: 20rem">
+    <div *ngFor="let car of cars; index as i" class="col-lg-4">
+      <div class="card mb-2 " style="width: 20rem">
         <div class="row">
           <div class="col">
             <div class="card-body">
+
               <p class="card-title fs-6">{{ car.brand }}</p>
               <p></p>
               <p class="card-subtitle mb-2 fs-5">{{ car.model }}</p>
               <p class="fs-6">Preço</p>
               <p class="fs-6">R${{ car.price }}</p>
-              <button (click)="deleteCar(i)" class="btn btn-danger btn-sm">
-                <i class="fa-solid fa-trash"></i>
+              {{i}}
+              <button (click)="deleteCar(i)" class="btn-custom mr-3">
+                <i class="text-danger fa-solid fa-trash fa-xl pointer"></i>
               </button>
-              <button data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="editCar(i)"
-                class="mx-3 btn btn-primary btn-sm">
-                <i class="fa-solid fa-pencil"></i>
+              <button class="btn-custom" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="editCar(i)">
+                <i class="text-primary fa-solid fa-pencil fa-xl pointer"></i>
               </button>
             </div>
           </div>
-          <div class="col">
+          <div data-bs-toggle="modal" data-bs-target="#carDetails" (click)="fillCarDetails(i)" class="col pointer">
             <img [src]="car.img" class="card-img-top img-custom" alt="..." />
           </div>
         </div>
       </div>
     </div>
+
+    <div class="col-lg-6">
+      <button (click)="addCar()" type="button" class="btn btn-primary col-2 btn-sm" data-bs-toggle="modal"
+        data-bs-target="#staticBackdrop">
+        Adicionar carro
+      </button>
+
+    </div>
+
+
     <!-- formulario modal -->
-
-    <button (click)="addCar()" type="button" class="btn btn-primary col-2 btn-sm" data-bs-toggle="modal"
-      data-bs-target="#staticBackdrop">
-      Adicionar carro
-    </button>
-
-
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
       aria-labelledby="staticBackdropLabel" aria-hidden="true">
       <div class="modal-dialog">
@@ -48,10 +52,10 @@
                   <mat-form-field class="input-custom-pb mr-1" appearance="outline">
                     <mat-label>Marca</mat-label>
                     <input type="text" matInput placeholder="BMW" formControlName="brand" />
-                    <mat-error *ngIf="
-                          formCar.hasError('brand') && !formCar.hasError('required')
+                    <mat-error class="mt-1 mb-1" *ngIf="
+                          !formCar.hasError('required')
                         ">
-                      Erro
+                      Marca é obrigatória
                     </mat-error>
                   </mat-form-field>
                 </div>
@@ -60,10 +64,10 @@
                   <mat-form-field class="input-custom-pb" appearance="outline">
                     <mat-label>Modelo</mat-label>
                     <input type="text" matInput placeholder="A4" formControlName="model" />
-                    <mat-error *ngIf="
-                              formCar.hasError('model') && !formCar.hasError('required')
+                    <mat-error class="mt-1 mb-1" *ngIf="
+                              !formCar.hasError('required')
                             ">
-                      Erro
+                      Modelo obrigatório
                     </mat-error>
                   </mat-form-field>
                 </div>
@@ -71,21 +75,77 @@
                   <mat-form-field class="input-custom-pb" appearance="outline">
                     <mat-label>Ano</mat-label>
                     <input type="number" matInput placeholder="1855" formControlName="year" />
-                    <mat-error *ngIf="
-                          formCar.hasError('year') && !formCar.hasError('required')
+                    <mat-error class="mt-1 mb-1" class="mt-1 mb-1" *ngIf="
+                        !formCar.hasError('required')
                         ">
-                      Erro
+                      Ano obrigatório
                     </mat-error>
                   </mat-form-field>
                 </div>
                 <div class="col">
                   <mat-form-field class="input-custom-pb" appearance="outline">
                     <mat-label>Preco</mat-label>
-                    <input type="number" matInput placeholder="R$55" formControlName="price" />
-                    <mat-error *ngIf="
-                          formCar.hasError('price') && !formCar.hasError('required')
+                    <input prefix="+7 " mask="(000) 000 00 00" type="number" matInput placeholder="R$55"
+                      formControlName="price" />
+                    <mat-error class="mt-1 mb-1" *ngIf="
+                        !formCar.hasError('required')
                         ">
-                      Erro
+                      Preço obrigatório
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="input-custom-pb" appearance="outline">
+                    <mat-label>Quilometragem</mat-label>
+                    <input type="text" matInput placeholder="Azul" formControlName="mileage" />
+                    <mat-error class="mt-1 mb-1" *ngIf="
+                          !formCar.hasError('required')
+                        ">
+                      Quilometragem obrigatória
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="input-custom-pb" appearance="outline">
+                    <mat-label>Combustivel</mat-label>
+                    <input type="text" matInput placeholder="Azul" formControlName="fuel" />
+                    <mat-error class="mt-1 mb-1" *ngIf="
+                          !formCar.hasError('required')
+                        ">
+                      Combustivel obrigatório
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="input-custom-pb" appearance="outline">
+                    <mat-label>Motor</mat-label>
+                    <input type="text" matInput placeholder="Azul" formControlName="engine" />
+                    <mat-error class="mt-1 mb-1" *ngIf="
+                          !formCar.hasError('required')
+                        ">
+                      Motor obrigatório
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="input-custom-pb" appearance="outline">
+                    <mat-label>Cambio</mat-label>
+                    <input type="text" matInput placeholder="Azul" formControlName="trasmission" />
+                    <mat-error class="mt-1 mb-1" *ngIf="
+                          !formCar.hasError('required')
+                        ">
+                      Cambio obrigatório
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col">
+                  <mat-form-field class="input-custom-pb" appearance="outline">
+                    <mat-label>Tracao</mat-label>
+                    <input type="text" matInput placeholder="Azul" formControlName="drive" />
+                    <mat-error class="mt-1 mb-1" *ngIf="
+                          !formCar.hasError('required')
+                        ">
+                      Tracao obrigatório
                     </mat-error>
                   </mat-form-field>
                 </div>
@@ -93,38 +153,15 @@
                   <mat-form-field class="input-custom-pb" appearance="outline">
                     <mat-label>Cor</mat-label>
                     <input type="text" matInput placeholder="Azul" formControlName="color" />
-                    <mat-error *ngIf="
-                          formCar.hasError('color') && !formCar.hasError('required')
-                        ">
-                      Erro
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-                <div class="col">
-                  <mat-form-field class="input-custom-pb" appearance="outline">
-                    <mat-label>Descricao</mat-label>
-                    <input type="text" matInput placeholder="rapido" formControlName="description" />
-                    <mat-error *ngIf="
-                          formCar.hasError('description') &&
+                    <mat-error class="mt-1 mb-1" *ngIf="
                           !formCar.hasError('required')
                         ">
-                      erro
+                      Cor obrigatório
                     </mat-error>
                   </mat-form-field>
                 </div>
                 <div class="col">
-                  <mat-form-field class="input-custom-pb rounded" appearance="outline">
-                    <mat-label>Velocidade</mat-label>
-                    <input type="email" matInput placeholder="55" formControlName="velocity" />
-                    <mat-error *ngIf="
-                          formCar.hasError('velocity') && !formCar.hasError('required')
-                        ">
-                      Erro
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-                <div class="col">
-                  <!-- <input class="d-none" id="uploadImg" type="file" formControlName="img" /> -->
+                  <input class="d-none" id="uploadImg" type="file" formControlName="img" />
                   <button type="button" class="btn mx-2 btn-primary" (click)="changeAvatar()">Adicionar imagem</button>
                 </div>
               </div>
@@ -139,5 +176,152 @@
         </div>
       </div>
     </div>
+
+    <!-- Modal  details-->
+    <div class="modal fade" id="carDetails" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="carDetailsLabel" aria-hidden="true">
+      <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Car Details</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row ">
+              <div class="col d-flex justify-content-center">
+                <img class="rounded img-fluid" [src]="carDetailsActual.img" alt="">
+
+              </div>
+
+            </div>
+            <div class="row mb-4">
+              <div class="col">
+                <div class="card bg-card">
+                  <div class="d-flex justify-content-center mt-1 mb-1">
+                    <i class="fas fa-copyright fa-2x icon-custom"></i>
+                    <div>
+                      <h3 class="text-center mb-0">Marca</h3>
+                      <h3 class="mb-0">{{carDetailsActual.brand}}</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card bg-card">
+                  <div class="d-flex justify-content-center mt-1 mb-1">
+                    <i class="fas fa-car fa-2x icon-custom"></i>
+                    <div>
+                      <h3 class="text-center mb-0">Modelo</h3>
+                      <h3 class=" mb-0">{{carDetailsActual.model}}</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col">
+                <div class="card bg-card">
+                  <div class="d-flex justify-content-center mt-1 mb-1">
+                    <i class="fas fa-calendar-week fa-2x icon-custom mr-3"></i>
+                    <div>
+                      <h3 class="text-center mb-0">Ano</h3>
+                      <h3 class=" mb-0">{{carDetailsActual.year}}</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card bg-card">
+                  <div class="d-flex justify-content-center mt-1 mb-1">
+                    <i class="fas fa-dollar-sign fa-2x icon-custom mr-3"></i>
+                    <div>
+                      <h3 class="text-center mb-0">Preço</h3>
+                      <h3 class=" mb-0">{{carDetailsActual.price}}</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col">
+                <div class="card bg-card">
+                  <div class="d-flex justify-content-center mt-1 mb-1">
+                    <i class="fas fa-tachometer-alt fa-2x icon-custom mr-3"></i>
+                    <div>
+                      <h3 class="text-center mb-0">Quilometragem</h3>
+                      <h3 class=" mb-0">{{carDetailsActual.mileage}}</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card bg-card">
+                  <div class="d-flex justify-content-center mt-1 mb-1">
+                    <i class="fas fa-gas-pump fa-2x icon-custom mr-3"></i>
+                    <div>
+                      <h3 class="text-center mb-0">Combustivel</h3>
+                      <h3 class=" mb-0">{{carDetailsActual.fuel}}</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col">
+                <div class="card bg-card">
+                  <div class="d-flex justify-content-center mt-1 mb-1">
+                    <i class="fas fa-power-off fa-2x icon-custom mr-3"></i>
+                    <div>
+                      <h3 class="text-center mb-0">Motor</h3>
+                      <h3 class=" mb-0">{{carDetailsActual.engine}}</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card bg-card">
+                  <div class="d-flex justify-content-center mt-1 mb-1">
+                    <i class="fas fa-cogs fa-2x icon-custom mr-3"></i>
+                    <div>
+                      <h3 class="text-center mb-0">Cambio</h3>
+                      <h3 class=" mb-0">{{carDetailsActual.trasmission}}</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row mb-4">
+              <div class="col">
+                <div class="card bg-card">
+                  <div class="d-flex justify-content-center mt-1 mb-1">
+                    <i class="fas fa-truck-monster fa-2x icon-custom mr-3"></i>
+                    <div>
+                      <h3 class="text-center mb-0">Tracao</h3>
+                      <h3 class=" mb-0">{{carDetailsActual.drive}}</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card bg-card">
+                  <div class="d-flex justify-content-center mt-1 mb-1">
+                    <i class="fas fa-fill-drip fa-2x icon-custom mr-3"></i>
+                    <div>
+                      <h3 class="text-center mb-0">Cor</h3>
+                      <h3 class=" mb-0">{{carDetailsActual.color}}</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            <button type="button" class="btn btn-primary">Comprar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>

@@ -14,6 +14,8 @@ export class HomeComponent implements OnInit {
 
   cars: Car[] = [];
 
+  carDetailsActual: Car = {} as Car;
+
   isEdit: boolean = false;
 
   formCar: FormGroup | any;
@@ -25,14 +27,17 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
 
     this.formCar = new FormGroup({
-      brand: new FormControl('', [Validators.required]),
-      model: new FormControl('', [Validators.required]),
-      year: new FormControl('', [Validators.required]),
-      price: new FormControl('', [Validators.required]),
-      color: new FormControl('', [Validators.required]),
-      description: new FormControl('', [Validators.required]),
-      img: new FormControl(''),
-      velocity: new FormControl('', [Validators.required]),
+      brand: new FormControl('', [Validators.required]), // Marca
+      model: new FormControl('', [Validators.required]), // Modelo
+      year: new FormControl('', [Validators.required]), // Ano
+      price: new FormControl('', [Validators.required]), // Preço
+      mileage: new FormControl('', [Validators.required]), // Quilometragem
+      fuel: new FormControl('', [Validators.required]), // Combustível
+      engine: new FormControl('', [Validators.required]), // Motor
+      trasmission: new FormControl('', [Validators.required]), // Câmbio
+      drive: new FormControl('', [Validators.required]), // Tração
+      color: new FormControl('', [Validators.required]), // Cor
+      img: new FormControl(''), // Imagem
     });
     this.carService.getCars().subscribe((cars: Car[]) => {
       this.cars = cars;
@@ -48,7 +53,6 @@ export class HomeComponent implements OnInit {
       );
       return
     }
-    console.log(dataCar);
     dataCar.id = this.cars[this.atualIndex].id;
     this.carService.putCar(dataCar).subscribe((car: Car) => {
 
@@ -59,6 +63,9 @@ export class HomeComponent implements OnInit {
   }
 
   deleteCar(i: number) {
+    this.carService.deleteCar(this.cars[i].id).subscribe((res: Car) => {
+      console.log(res);
+    })
     this.cars.splice(i, 1);
   }
 
@@ -79,10 +86,13 @@ export class HomeComponent implements OnInit {
       model: data.model,
       year: data.year,
       price: data.price,
+      mileage: data.mileage,
+      fuel: data.fuel,
+      engine: data.engine,
+      trasmission: data.trasmission,
+      drive: data.drive,
       color: data.color,
-      description: data.description,
       img: data.img,
-      velocity: data.velocity
     })
   }
 
@@ -107,12 +117,17 @@ export class HomeComponent implements OnInit {
         reader.readAsDataURL(response);
         reader.onload = () => {
           this.formCar.get('img').setValue(reader.result as string);
-          this.detectorChanges.detectChanges();
+          console.log(this.formCar.get('img').value);
+
         };
       });
   }
 
   changeAvatar() {
     document.getElementById('uploadImg')?.click();
+  }
+
+  fillCarDetails(index: number) {
+    this.carDetailsActual = this.cars[index];
   }
 }
