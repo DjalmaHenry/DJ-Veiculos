@@ -22,6 +22,8 @@ export class HomeComponent implements OnInit {
 
   atualIndex: number = 0;
 
+  imgCarForm: string = "";
+
   constructor(private carService: CarService, private detectorChanges: ChangeDetectorRef) { }
 
   ngOnInit(): void {
@@ -78,6 +80,7 @@ export class HomeComponent implements OnInit {
   addCar() {
     this.isEdit = false;
     this.formCar.reset()
+    this.imgCarForm = "";
   }
 
   fillForm(data: Car) {
@@ -96,31 +99,22 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  onFileSelected(e: any) {
-    const file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
-    const pattern = /image-*/;
-    if (!file || !file.type.match(pattern)) return;
+  onFileSelected(event: any) {
+    const reader = new FileReader();
+    let imgAux: string = "";
 
-    const maxAvatarImage = 2;
-    if (Math.round(file.size / 1024) >= maxAvatarImage * 1000) return;
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        imgAux = reader.result as string;
+        this.formCar.patchValue({
+          img: imgAux
+        });
+        this.imgCarForm = imgAux;
+      };
+    }
 
-    this.carService
-      .compress(file)
-      .pipe(
-        take(1),
-        catchError((event) => {
-          return throwError(event);
-        })
-      )
-      .subscribe((response) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(response);
-        reader.onload = () => {
-          this.formCar.get('img').setValue(reader.result as string);
-          console.log(this.formCar.get('img').value);
-
-        };
-      });
   }
 
   changeAvatar() {

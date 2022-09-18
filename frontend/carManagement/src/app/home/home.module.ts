@@ -5,10 +5,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { HomeComponent } from './home.component';
 
+import { NgxMaskModule, IConfig } from 'ngx-mask'
 
-
-
-
+const maskConfig: Partial<IConfig> = {
+  validation: false,
+};
 @Injectable({
   providedIn: 'root'
 })
@@ -20,7 +21,8 @@ import { HomeComponent } from './home.component';
     MatInputModule,
     MatIconModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxMaskModule.forRoot(maskConfig)
   ]
 })
-export class HomeModule {}
+export class HomeModule { }

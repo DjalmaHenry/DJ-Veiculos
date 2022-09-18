@@ -10,5 +10,5 @@ export interface Car {
     trasmission: string; // Câmbio
     drive: string; // Tração
     color: string; // Cor
-    img: string; // Imagem
+    img: any; // Imagem
 }

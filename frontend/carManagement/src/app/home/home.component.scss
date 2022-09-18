@@ -25,3 +25,12 @@
   all: unset;
   margin-right: 15px;
 }
+
+.card-rover:hover {
+  box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
+  top: -2px;
+  -moz-transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+  transition: all 0.5s;
+}

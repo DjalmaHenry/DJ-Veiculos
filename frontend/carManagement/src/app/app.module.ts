@@ -15,11 +15,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 
-import { NgxMaskModule, IConfig } from 'ngx-mask'
 
-const maskConfig: Partial<IConfig> = {
-  validation: false,
-};
 
 @NgModule({
   declarations: [
@@ -37,7 +33,6 @@ const maskConfig: Partial<IConfig> = {
     HttpClientModule,
     MatFormFieldModule,
     HomeModule,
-    NgxMaskModule.forRoot(maskConfig)
   ],
   providers: [HttpClientModule],
   bootstrap: [AppComponent],

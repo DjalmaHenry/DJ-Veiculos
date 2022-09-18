@@ -1,6 +1,6 @@
-<div class="container-fluid ">
+<div class="container-fluid mt-3">
   <div class="row">
-    <div *ngFor="let car of cars; index as i" class="col-lg-4">
+    <div *ngFor="let car of cars; index as i" class="col-lg-4 d-flex justify-content-center justify-content-md-start">
       <div class="card mb-2 " style="width: 20rem">
         <div class="row">
           <div class="col">
@@ -10,8 +10,7 @@
               <p></p>
               <p class="card-subtitle mb-2 fs-5">{{ car.model }}</p>
               <p class="fs-6">Preço</p>
-              <p class="fs-6">R${{ car.price }}</p>
-              {{i}}
+              <p class="fs-6">R${{ car.price}}</p>
               <button (click)="deleteCar(i)" class="btn-custom mr-3">
                 <i class="text-danger fa-solid fa-trash fa-xl pointer"></i>
               </button>
@@ -26,13 +25,19 @@
         </div>
       </div>
     </div>
+    <div class="col-lg-4 d-flex justify-content-center justify-content-md-start">
 
-    <div class="col-lg-6">
-      <button (click)="addCar()" type="button" class="btn btn-primary col-2 btn-sm" data-bs-toggle="modal"
-        data-bs-target="#staticBackdrop">
-        Adicionar carro
-      </button>
-
+      <div data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="addCar()" class="card mb-2 pointer "
+        style=" width: 20rem; height: 11rem;">
+        <div class="card-body text-center mt-2">
+          <div>
+            <h3>Adicionar carro</h3>
+            <button type="button" class="btn-custom">
+              <i class="fas fa-plus fa-6x"></i>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
 
 
@@ -48,6 +53,12 @@
           <div class="modal-body">
             <form novalidate [formGroup]="formCar">
               <div class="row">
+                <div class="row" *ngIf="imgCarForm">
+                  <div class="col ">
+                    <img [src]="imgCarForm" alt="" class="img-custom ">
+                  </div>
+
+                </div>
                 <div class="col">
                   <mat-form-field class="input-custom-pb mr-1" appearance="outline">
                     <mat-label>Marca</mat-label>
@@ -74,7 +85,7 @@
                 <div class="col">
                   <mat-form-field class="input-custom-pb" appearance="outline">
                     <mat-label>Ano</mat-label>
-                    <input type="number" matInput placeholder="1855" formControlName="year" />
+                    <input mask="0000" type="text" matInput placeholder="9999" formControlName="year" />
                     <mat-error class="mt-1 mb-1" class="mt-1 mb-1" *ngIf="
                         !formCar.hasError('required')
                         ">
@@ -85,7 +96,7 @@
                 <div class="col">
                   <mat-form-field class="input-custom-pb" appearance="outline">
                     <mat-label>Preco</mat-label>
-                    <input prefix="+7 " mask="(000) 000 00 00" type="number" matInput placeholder="R$55"
+                    <input prefix="R$" mask="000000000" type="text" matInput placeholder="R$55"
                       formControlName="price" />
                     <mat-error class="mt-1 mb-1" *ngIf="
                         !formCar.hasError('required')
@@ -160,9 +171,9 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
-                <div class="col">
-                  <input class="d-none" id="uploadImg" type="file" formControlName="img" />
-                  <button type="button" class="btn mx-2 btn-primary" (click)="changeAvatar()">Adicionar imagem</button>
+                <div class="col-9">
+                  <input (change)="onFileSelected($event)" class="d-none" id="uploadImg" type="file" />
+                  <button type="button" class="btn btn-primary" (click)="changeAvatar()">Adicionar imagem</button>
                 </div>
               </div>
             </form>
@@ -183,7 +194,7 @@
       <div class="modal-dialog modal-xl">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel">Car Details</h5>
+            <h1 class="modal-title" id="staticBackdropLabel">Detalhes do veiculo</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
