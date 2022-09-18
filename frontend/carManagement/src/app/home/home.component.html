@@ -20,7 +20,7 @@
             </div>
           </div>
           <div data-bs-toggle="modal" data-bs-target="#carDetails" (click)="fillCarDetails(i)" class="col pointer">
-            <img [src]="car.img" class="card-img-top img-custom" alt="..." />
+            <img [src]="car.img" (error)="img.src = getDefaultImage()" class="card-img-top img-custom" alt="..." #img />
           </div>
         </div>
       </div>

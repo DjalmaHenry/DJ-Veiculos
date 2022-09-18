@@ -124,4 +124,8 @@ export class HomeComponent implements OnInit {
   fillCarDetails(index: number) {
     this.carDetailsActual = this.cars[index];
   }
+
+  getDefaultImage() {
+    return `https://images.unsplash.com/photo-1494976388531-d1058494cdd8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8M3x8fGVufDB8fHx8&w=1000&q=80`;
+  }
 }
