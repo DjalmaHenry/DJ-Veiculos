@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { ShowroomService } from './showroom.service';
 import { CreateShowroomDto } from './dto/create-showroom.dto';
 import { UpdateShowroomDto } from './dto/update-showroom.dto';
@@ -19,11 +27,14 @@ export class ShowroomController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.showroomService.findOne(+id);
+    return this.showroomService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateShowroomDto: UpdateShowroomDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateShowroomDto: UpdateShowroomDto,
+  ) {
     return this.showroomService.update(+id, updateShowroomDto);
   }
 

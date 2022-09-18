@@ -4,6 +4,6 @@ import { ShowroomController } from './showroom.controller';
 
 @Module({
   controllers: [ShowroomController],
-  providers: [ShowroomService]
+  providers: [ShowroomService],
 })
 export class ShowroomModule {}
