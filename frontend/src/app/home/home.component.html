@@ -1,13 +1,17 @@
 <div class="container-fluid mt-3">
+  <div class="card-body text-center mt-2 add-component">
+    <button type="button" class="btn-custom" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="addCar()">
+      <i class="fas fa-plus fa-6x"></i>
+      <h3 class="fw-bold mb-0">Adicionar carro</h3>
+    </button>
+  </div>
   <div class="row">
-    <div *ngFor="let car of cars; index as i" class="col-lg-4 d-flex justify-content-center justify-content-md-start">
+    <div *ngFor="let car of cars; index as i" class="col-lg-4 d-flex justify-content-center">
       <div class="card mb-2 " style="width: 20rem">
         <div class="card-body">
           <div class="row">
             <div class="col">
-
               <p class="card-title fs-6">{{ car.brand }}</p>
-              <p></p>
               <p class="card-subtitle mb-2 fs-5">{{ car.model }}</p>
               <p class="fs-6">Preço</p>
               <p class="fs-6">R${{ car.price | mask: '00.000|000.000|0.000.0000|00.000.000 '}}</p>
@@ -27,19 +31,6 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-4 d-flex justify-content-center justify-content-md-start">
-
-      <div data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="addCar()" class="card pointer "
-        style=" width: 20rem; height: 11rem;">
-        <div class="card-body text-center mt-2">
-          <h3 class="fw-bold mb-0">Adicionar carro</h3>
-          <button type="button" class="btn-custom">
-            <i class="fas fa-plus fa-6x"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-
 
     <!-- formulário modal -->
     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
