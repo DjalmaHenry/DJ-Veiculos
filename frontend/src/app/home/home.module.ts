@@ -5,7 +5,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { HomeComponent } from './home.component';
 
-import { NgxMaskModule, IConfig } from 'ngx-mask'
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { CarDetailsComponent } from './car-details/car-details.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -15,7 +16,7 @@ const maskConfig: Partial<IConfig> = {
 })
 
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [HomeComponent, CarDetailsComponent],
   imports: [
     CommonModule,
     MatInputModule,
