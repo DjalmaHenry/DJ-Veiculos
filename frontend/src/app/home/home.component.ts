@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
 
   atualIndex: number = 0;
 
-  imgCarDefalt: string = "../../assets/img/cars/car-default.jpg";
+  imgCarDefault: string = "../../assets/img/cars/car-default.jpg";
 
   constructor(private carService: CarService, private detectorChanges: ChangeDetectorRef) { }
 
@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
       mileage: new FormControl('', [Validators.required]), // Quilometragem
       fuel: new FormControl('', [Validators.required]), // Combustível
       engine: new FormControl('', [Validators.required]), // Motor
-      trasmission: new FormControl('', [Validators.required]), // Câmbio
+      transmission: new FormControl('', [Validators.required]), // Câmbio
       drive: new FormControl('', [Validators.required]), // Tração
       color: new FormControl('', [Validators.required]), // Cor
       img: new FormControl(''), // Imagem
@@ -97,7 +97,7 @@ export class HomeComponent implements OnInit {
       mileage: data.mileage,
       fuel: data.fuel,
       engine: data.engine,
-      trasmission: data.trasmission,
+      transmission: data.transmission,
       drive: data.drive,
       color: data.color,
       img: data.img,

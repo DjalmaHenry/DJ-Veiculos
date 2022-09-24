@@ -1,147 +1,135 @@
 <div class="modal fade" id="carDetails" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="carDetailsLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title mb-0" id="staticBackdropLabel">Detalhes do veiculo</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="row ">
-                    <div class="col d-flex justify-content-center mb-4">
-                        <img class="rounded img-fluid" [src]="this.car.img" (error)="imgDetails.src = imgCarDefalt"
-                            #imgDetails>
-
-                    </div>
-
-                </div>
-                <div class="row mb-4">
-                    <div class="col">
-                        <div class="card bg-card">
-                            <div class="d-flex justify-content-center mt-1 mb-1">
-                                <i class="fas fa-copyright fa-2x icon-custom"></i>
-                                <div>
-                                    <h3 class="text-center mb-0">Marca</h3>
-                                    <h3 class="mb-0">{{this.car.brand}}</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card bg-card">
-                            <div class="d-flex justify-content-center mt-1 mb-1">
-                                <i class="fas fa-car fa-2x icon-custom"></i>
-                                <div>
-                                    <h3 class="text-center mb-0">Modelo</h3>
-                                    <h3 class=" mb-0">{{this.car.model}}</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mb-4">
-                    <div class="col">
-                        <div class="card bg-card">
-                            <div class="d-flex justify-content-center mt-1 mb-1">
-                                <i class="fas fa-calendar-week fa-2x icon-custom mr-3"></i>
-                                <div>
-                                    <h3 class="text-center mb-0">Ano</h3>
-                                    <h3 class=" mb-0">{{this.car.year}}</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card bg-card">
-                            <div class="d-flex justify-content-center mt-1 mb-1">
-                                <i class="fas fa-dollar-sign fa-2x icon-custom mr-3"></i>
-                                <div>
-                                    <h3 class="text-center mb-0">Preço</h3>
-                                    <h3 class=" mb-0">R${{ this.car.price | mask: '00.000|000.000|0.000.000|00.000.000
-                                        '}}
-                                    </h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mb-4">
-                    <div class="col">
-                        <div class="card bg-card">
-                            <div class="d-flex justify-content-center mt-1 mb-1">
-                                <i class="fas fa-tachometer-alt fa-2x icon-custom mr-3"></i>
-                                <div>
-                                    <h3 class="text-center mb-0">Quilometragem</h3>
-                                    <h3 class=" mb-0">{{this.car.mileage}}</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card bg-card">
-                            <div class="d-flex justify-content-center mt-1 mb-1">
-                                <i class="fas fa-gas-pump fa-2x icon-custom mr-3"></i>
-                                <div>
-                                    <h3 class="text-center mb-0">Combustível</h3>
-                                    <h3 class=" mb-0">{{this.car.fuel}}</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mb-4">
-                    <div class="col">
-                        <div class="card bg-card">
-                            <div class="d-flex justify-content-center mt-1 mb-1">
-                                <i class="fas fa-power-off fa-2x icon-custom mr-3"></i>
-                                <div>
-                                    <h3 class="text-center mb-0">Motor</h3>
-                                    <h3 class=" mb-0">{{this.car.engine}}</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card bg-card">
-                            <div class="d-flex justify-content-center mt-1 mb-1">
-                                <i class="fas fa-cogs fa-2x icon-custom mr-3"></i>
-                                <div>
-                                    <h3 class="text-center mb-0">Cambio</h3>
-                                    <h3 class=" mb-0">{{this.car.trasmission}}</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mb-4">
-                    <div class="col">
-                        <div class="card bg-card">
-                            <div class="d-flex justify-content-center mt-1 mb-1">
-                                <i class="fas fa-truck-monster fa-2x icon-custom mr-3"></i>
-                                <div>
-                                    <h3 class="text-center mb-0">Tração</h3>
-                                    <h3 class=" mb-0">{{this.car.drive}}</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card bg-card">
-                            <div class="d-flex justify-content-center mt-1 mb-1">
-                                <i class="fas fa-fill-drip fa-2x icon-custom mr-3"></i>
-                                <div>
-                                    <h3 class="text-center mb-0">Cor</h3>
-                                    <h3 class=" mb-0">{{this.car.color}}</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                <button type="button" class="btn btn-primary">Comprar</button>
-            </div>
+  aria-labelledby="carDetailsLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title mb-0" id="staticBackdropLabel">Detalhes do veiculo</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row ">
+          <div class="col d-flex justify-content-center mb-4">
+            <img class="rounded img-fluid" [src]="this.car.img" (error)="imgDetails.src = imgCarDefault" #imgDetails>
+          </div>
         </div>
+        <div class="row mb-4">
+          <div class="col-lg-6 mb-3">
+            <div class="card bg-card">
+              <div class="d-flex justify-content-center mt-1 mb-1">
+                <i class="fas fa-copyright fa-2x icon-custom"></i>
+                <div>
+                  <h3 class="text-center mb-0">Marca</h3>
+                  <h3 class="mb-0">{{this.car.brand}}</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 mb-3">
+            <div class="card bg-card">
+              <div class="d-flex justify-content-center mt-1 mb-1">
+                <i class="fas fa-car fa-2x icon-custom"></i>
+                <div>
+                  <h3 class="text-center mb-0">Modelo</h3>
+                  <h3 class=" mb-0">{{this.car.model}}</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 mb-3">
+            <div class="card bg-card">
+              <div class="d-flex justify-content-center mt-1 mb-1">
+                <i class="fas fa-calendar-week fa-2x icon-custom mr-3"></i>
+                <div>
+                  <h3 class="text-center mb-0">Ano</h3>
+                  <h3 class=" mb-0">{{this.car.year}}</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 mb-3">
+            <div class="card bg-card">
+              <div class="d-flex justify-content-center mt-1 mb-1">
+                <i class="fas fa-dollar-sign fa-2x icon-custom mr-3"></i>
+                <div>
+                  <h3 class="text-center mb-0">Preço</h3>
+                  <h3 class=" mb-0">R${{ this.car.price | mask: '00.000|000.000|0.000.000|00.000.000'}}
+                  </h3>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 mb-3">
+            <div class="card bg-card">
+              <div class="d-flex justify-content-center mt-1 mb-1">
+                <i class="fas fa-tachometer-alt fa-2x icon-custom mr-3"></i>
+                <div>
+                  <h3 class="text-center mb-0">Quilometragem</h3>
+                  <h3 class=" mb-0">{{this.car.mileage}}</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 mb-3">
+            <div class="card bg-card">
+              <div class="d-flex justify-content-center mt-1 mb-1">
+                <i class="fas fa-gas-pump fa-2x icon-custom mr-3"></i>
+                <div>
+                  <h3 class="text-center mb-0">Combustível</h3>
+                  <h3 class=" mb-0">{{this.car.fuel}}</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 mb-3">
+            <div class="card bg-card">
+              <div class="d-flex justify-content-center mt-1 mb-1">
+                <i class="fas fa-power-off fa-2x icon-custom mr-3"></i>
+                <div>
+                  <h3 class="text-center mb-0">Motor</h3>
+                  <h3 class=" mb-0">{{this.car.engine}}</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 mb-3">
+            <div class="card bg-card">
+              <div class="d-flex justify-content-center mt-1 mb-1">
+                <i class="fas fa-cogs fa-2x icon-custom mr-3"></i>
+                <div>
+                  <h3 class="text-center mb-0">Cambio</h3>
+                  <h3 class=" mb-0">{{this.car.transmission}}</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 mb-3">
+            <div class="card bg-card">
+              <div class="d-flex justify-content-center mt-1 mb-1">
+                <i class="fas fa-truck-monster fa-2x icon-custom mr-3"></i>
+                <div>
+                  <h3 class="text-center mb-0">Tração</h3>
+                  <h3 class=" mb-0">{{this.car.drive}}</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 mb-3">
+            <div class="card bg-card">
+              <div class="d-flex justify-content-center mt-1 mb-1">
+                <i class="fas fa-fill-drip fa-2x icon-custom mr-3"></i>
+                <div>
+                  <h3 class="text-center mb-0">Cor</h3>
+                  <h3 class=" mb-0">{{this.car.color}}</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-primary">Comprar</button>
+      </div>
     </div>
+  </div>
 </div>

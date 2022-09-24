@@ -9,7 +9,7 @@ export class CarDetailsComponent implements OnInit {
 
   @Input() car: any;
 
-  imgCarDefalt: string = "../../assets/img/cars/car-default.jpg";
+  imgCarDefault: string = "../../assets/img/cars/car-default.jpg";
 
   constructor() { }
 

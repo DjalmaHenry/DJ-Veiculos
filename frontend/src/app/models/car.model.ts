@@ -7,7 +7,7 @@ export interface Car {
     mileage: number; // Quilometragem
     fuel: string; // Combustível
     engine: string; // Motor
-    trasmission: string; // Câmbio
+    transmission: string; // Câmbio
     drive: string; // Tração
     color: string; // Cor
     img?: any; // Imagem
