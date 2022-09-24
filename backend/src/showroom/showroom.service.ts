@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { IDocument, ShowroomDto } from './dto/showroom.dto';
+import { ShowroomDto } from './dto/showroom.dto';
 import * as firebase from 'firebase-admin';
 import { DocumentSnapshot } from '@google-cloud/firestore';
 
