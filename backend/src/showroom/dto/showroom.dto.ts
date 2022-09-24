@@ -10,5 +10,4 @@ export class ShowroomDto {
   transmission: string;
   drive: string;
   color: string;
-  img?: string;
 }
