@@ -49,6 +49,7 @@ export class ShowroomController {
   @Delete(':id')
   public async remove(@Param('id') id: string): Promise<void> {
     const res = await this.showroomService.remove(id);
+
     if (!res) {
       throw new BadRequestException();
     }

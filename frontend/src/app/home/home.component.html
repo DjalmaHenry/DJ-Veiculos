@@ -25,7 +25,7 @@
             </div>
             <div class="col d-flex align-items-center">
               <div data-bs-toggle="modal" data-bs-target="#carDetails" (click)="fillCarDetails(i)" class="col pointer">
-                <img [src]="car.img" (error)="img.src = imgCarDefault" class="img-custom mr-5" alt="..." #img />
+                <img [src]="" (error)="img.src = imgCarDefault" class="img-custom mr-5" alt="..." #img />
               </div>
             </div>
           </div>
@@ -162,19 +162,19 @@
 
                   <div class="col text-center">
                     <input (change)="onFileSelected($event)" class="d-none" id="uploadImg" type="file" />
-                    <button type="button" class="btn btn-primary" (click)="changeAvatar()">{{formCar.get('img').value ?
-                      'Trocar imagem' : 'Adicionar imagem'}}</button>
+                    <!-- <button type="button" class="btn btn-primary" (click)="changeAvatar()">{{formCar.get('img').value ?
+                      'Trocar imagem' : 'Adicionar imagem'}}</button> -->
                     <label class="text-muted fw-light d-flex flex-column">Tamanho máximo: 1mb</label>
 
                   </div>
                 </div>
               </div>
-              <div class="row mt-2 " *ngIf="formCar.get('img').value">
+              <!-- <div class="row mt-2 " *ngIf="formCar.get('img').value">
                 <div class="col d-flex justify-content-center text-center">
                   <img [src]="formCar.get('img').value" alt="" class="img-custom rounded">
                 </div>
 
-              </div>
+              </div> -->
             </form>
           </div>
           <div class="modal-footer">

@@ -39,41 +39,41 @@ export class HomeComponent implements OnInit {
       transmission: new FormControl('', [Validators.required]), // Câmbio
       drive: new FormControl('', [Validators.required]), // Tração
       color: new FormControl('', [Validators.required]), // Cor
-      img: new FormControl(''), // Imagem
     });
-    // this.carService.getCar("TASG08RHH65zp7OWsdwC").subscribe((car: Car) => {
-    //   console.log(car);
 
-    //   this.cars[0] = car;
-    // })
+    this.loadCars();
+  }
 
+  loadCars() {
     this.carService.getCars().subscribe((cars: Car[]) => {
       this.cars = cars;
-    })
+    });
   }
 
   saveCarForm() {
     const dataCar: Car = this.formCar.value;
     if (!this.isEdit) {
-      this.carService.postCar(dataCar).subscribe((car: Car) => {
-        this.cars.push(car);
+      this.carService.postCar(dataCar).subscribe((id: string) => {
+        if (id) {
+          this.loadCars();
+        } else {}
       }
       );
-      return
+      return;
     }
     dataCar.id = this.cars[this.atualIndex].id;
-    this.carService.putCar(dataCar).subscribe((car: Car) => {
+    // this.carService.putCar(dataCar).subscribe((car: Car) => {
 
-      const index = this.cars.findIndex((c: Car) => c.id === car.id);
-      this.cars[index] = car;
-    }
-    );
+    //   const index = this.cars.findIndex((c: Car) => c.id === car.id);
+    //   this.cars[index] = car;
+    // }
+    // );
   }
 
   deleteCar(i: number) {
-    this.carService.deleteCar(this.cars[i].id).subscribe((res: Car) => {
-      console.log(res);
-    })
+    // this.carService.deleteCar(this.cars[i].id).subscribe((res: Car) => {
+    //   console.log(res);
+    // });
     this.cars.splice(i, 1);
   }
 
@@ -100,7 +100,6 @@ export class HomeComponent implements OnInit {
       transmission: data.transmission,
       drive: data.drive,
       color: data.color,
-      img: data.img,
     })
   }
 

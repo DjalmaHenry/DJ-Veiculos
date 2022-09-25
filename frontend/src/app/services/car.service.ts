@@ -10,39 +10,23 @@ import { Car } from "../models/car.model";
 export class CarService {
   constructor(private http: HttpClient) { }
 
-  // getCars(): Observable<Car[]> {
-  //   return this.http.get<Car[]>(`${environment.API}/showroom`);
-  // }
-
-  // getCar(id: string): Observable<any> {
-  //   return this.http.get<any>(`${environment.API}/showroom/${id}`);
-  // }
-
-  // postCar(car: Car): Observable<Car> {
-  //   return this.http.post<Car>(`${environment.API}/showroom`, car);
-  // }
-
-  // putCar(car: Car): Observable<Car> {
-  //   return this.http.put<Car>(`${environment.API}/showroom/${car.id}`, car);
-  // }
-
-  // deleteCar(id: any): Observable<Car> {
-  //   return this.http.delete<Car>(`${environment.API}/showroom/${id}`);
-  // }
-
   getCars(): Observable<Car[]> {
-    return this.http.get<Car[]>(`${environment.API}/cars`);
+    return this.http.get<Car[]>(`${environment.API}/showroom`);
   }
 
-  postCar(car: Car): Observable<Car> {
-    return this.http.post<Car>(`${environment.API}/cars`, car);
+  getCar(id: string): Observable<Car> {
+    return this.http.get<Car>(`${environment.API}/showroom/${id}`);
   }
 
-  putCar(car: Car): Observable<Car> {
-    return this.http.put<Car>(`${environment.API}/cars/${car.id}`, car);
+  postCar(car: Car): Observable<string> {
+    return this.http.post<string>(`${environment.API}/showroom`, car);
   }
 
-  deleteCar(id: any): Observable<Car> {
-    return this.http.delete<Car>(`${environment.API}/cars/${id}`);
+  putCar(car: Car) {
+    return this.http.put(`${environment.API}/showroom/${car.id}`, car);
+  }
+
+  deleteCar(id: string) {
+    return this.http.delete(`${environment.API}/showroom/${id}`);
   }
 }
