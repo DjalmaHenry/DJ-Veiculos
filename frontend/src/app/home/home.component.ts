@@ -56,7 +56,7 @@ export class HomeComponent implements OnInit {
       this.carService.postCar(dataCar).subscribe((id: string) => {
         if (id) {
           this.loadCars();
-        } else {}
+        } else { }
       }
       );
       return;
@@ -70,11 +70,12 @@ export class HomeComponent implements OnInit {
     // );
   }
 
-  deleteCar(i: number) {
-    // this.carService.deleteCar(this.cars[i].id).subscribe((res: Car) => {
-    //   console.log(res);
-    // });
-    this.cars.splice(i, 1);
+  deleteCar(i: string | undefined) {
+    if (i) {
+      this.carService.deleteCar(i).subscribe(() => {
+        this.loadCars();
+      });
+    }
   }
 
   editCar(i: number) {

@@ -16,7 +16,7 @@
               <p class="card-subtitle mb-2 fs-5">{{ car.model }}</p>
               <p class="fs-6">Preço</p>
               <p class="fs-6">R${{ car.price | mask: '00.000|000.000|0.000.0000|00.000.000 '}}</p>
-              <button (click)="deleteCar(i)" class="btn-custom mr-3">
+              <button (click)="deleteCar(car.id)" class="btn-custom mr-3">
                 <i class="text-danger fa-solid fa-trash fa-xl pointer"></i>
               </button>
               <button class="btn-custom" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="editCar(i)">
