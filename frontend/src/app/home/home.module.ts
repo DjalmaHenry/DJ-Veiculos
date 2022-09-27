@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { HomeComponent } from './home.component';
+import { MatSelectModule } from '@angular/material/select';
 
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { CarDetailsComponent } from './car-details/car-details.component';
@@ -23,6 +24,7 @@ const maskConfig: Partial<IConfig> = {
     MatIconModule,
     FormsModule,
     ReactiveFormsModule,
+    MatSelectModule,
     NgxMaskModule.forRoot(maskConfig)
   ]
 })

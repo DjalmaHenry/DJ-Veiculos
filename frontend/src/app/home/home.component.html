@@ -47,7 +47,7 @@
               <div class="row">
 
                 <div class="col text-center">
-                  <mat-form-field class="input-custom-pb mr-1" appearance="outline">
+                  <!-- <mat-form-field class="input-custom-pb mr-1" appearance="outline">
                     <mat-label>Marca</mat-label>
                     <input type="text" matInput placeholder="BMW" formControlName="brand" />
                     <mat-error class="mt-1 mb-1" *ngIf="
@@ -55,6 +55,15 @@
                         ">
                       Marca é obrigatória
                     </mat-error>
+                  </mat-form-field> -->
+
+                  <mat-form-field appearance="outline">
+                    <mat-label>Marca</mat-label>
+                    <mat-select formControlName="brand">
+                      <mat-option value="option1">Option 1</mat-option>
+                      <mat-option value="option2">Option 2 (disabled)</mat-option>
+                      <mat-option value="option3">Option 3</mat-option>
+                    </mat-select>
                   </mat-form-field>
                 </div>
                 <div class="col text-center">
