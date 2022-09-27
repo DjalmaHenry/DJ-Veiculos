@@ -24,6 +24,41 @@ export class HomeComponent implements OnInit {
 
   imgCarDefault: string = "../../assets/img/cars/car-default.jpg";
 
+  nameCars: string[] = [
+    "alfaRomeu",
+    "astonMartin",
+    "audi",
+    "bmw",
+    "bugatti",
+    "cadillac",
+    "chevrolet",
+    "caoaChery",
+    "citroen",
+    "corvette",
+    "ferrari",
+    "fiat",
+    "ford",
+    "gmc",
+    "jeep",
+    "koenigsegg",
+    "landRover",
+    "maserati",
+    "mazda",
+    "mclaren",
+    "mercedesbenz",
+    "mini",
+    "mitsubishi",
+    "porche",
+    "ram",
+    "renault",
+    "rollsRoyce",
+    "subaru",
+    "tesla",
+    "volkswagen",
+    "volvo"
+  ];
+
+
   constructor(private carService: CarService, private detectorChanges: ChangeDetectorRef) { }
 
   ngOnInit(): void {
@@ -41,11 +76,6 @@ export class HomeComponent implements OnInit {
       color: new FormControl('', [Validators.required]), // Cor
       img: new FormControl(''), // Imagem
     });
-    // this.carService.getCar("TASG08RHH65zp7OWsdwC").subscribe((car: Car) => {
-    //   console.log(car);
-
-    //   this.cars[0] = car;
-    // })
 
     this.carService.getCars().subscribe((cars: Car[]) => {
       this.cars = cars;
