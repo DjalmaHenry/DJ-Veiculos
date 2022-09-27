@@ -26,6 +26,7 @@ const maskConfig: Partial<IConfig> = {
     FormsModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule,
+    MatSelectModule,
     NgxMaskModule.forRoot(maskConfig)
   ]
 })
