@@ -3,43 +3,55 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
+  Put,
+  BadRequestException,
 } from '@nestjs/common';
+import { ShowroomDto } from './dto/showroom.dto';
 import { ShowroomService } from './showroom.service';
-import { CreateShowroomDto } from './dto/create-showroom.dto';
-import { UpdateShowroomDto } from './dto/update-showroom.dto';
 
 @Controller('showroom')
 export class ShowroomController {
   constructor(private readonly showroomService: ShowroomService) {}
 
   @Post()
-  create(@Body() createShowroomDto: CreateShowroomDto) {
-    return this.showroomService.create(createShowroomDto);
+  public async create(
+    @Body() createShowroomDto: ShowroomDto,
+  ): Promise<{ uid: string }> {
+    const res = await this.showroomService.create(createShowroomDto);
+
+    return { uid: res };
   }
 
   @Get()
-  findAll() {
-    return this.showroomService.findAll();
+  public async findAll(): Promise<ShowroomDto[]> {
+    return await this.showroomService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.showroomService.findOne(id);
+  public async findOne(@Param('id') id: string): Promise<ShowroomDto> {
+    return await this.showroomService.findOne(id);
   }
 
-  @Patch(':id')
-  update(
+  @Put(':id')
+  public async update(
     @Param('id') id: string,
-    @Body() updateShowroomDto: UpdateShowroomDto,
-  ) {
-    return this.showroomService.update(+id, updateShowroomDto);
+    @Body() updateShowroomDto: ShowroomDto,
+  ): Promise<void> {
+    const res = await this.showroomService.update(id, updateShowroomDto);
+
+    if (!res) {
+      throw new BadRequestException();
+    }
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.showroomService.remove(+id);
+  public async remove(@Param('id') id: string): Promise<void> {
+    const res = await this.showroomService.remove(id);
+
+    if (!res) {
+      throw new BadRequestException();
+    }
   }
 }

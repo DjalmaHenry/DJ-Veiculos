@@ -20,7 +20,9 @@ export class HomeComponent implements OnInit {
 
   formCar: FormGroup | any;
 
-  atualIndex: number = 0;
+  atualIndex: any
+
+  loading: boolean = false;
 
   imgCarDefault: string = "../../assets/img/cars/car-default.jpg";
 
@@ -66,51 +68,75 @@ export class HomeComponent implements OnInit {
     this.formCar = new FormGroup({
       brand: new FormControl('', [Validators.required]), // Marca
       model: new FormControl('', [Validators.required]), // Modelo
-      year: new FormControl('', [Validators.required]), // Ano
-      price: new FormControl('', [Validators.required]), // Preço
-      mileage: new FormControl('', [Validators.required]), // Quilometragem
+      year: new FormControl(0, [Validators.required]), // Ano
+      price: new FormControl(0, [Validators.required]), // Preço
+      mileage: new FormControl(0, [Validators.required]), // Quilometragem
       fuel: new FormControl('', [Validators.required]), // Combustível
       engine: new FormControl('', [Validators.required]), // Motor
       transmission: new FormControl('', [Validators.required]), // Câmbio
       drive: new FormControl('', [Validators.required]), // Tração
       color: new FormControl('', [Validators.required]), // Cor
-      img: new FormControl(''), // Imagem
     });
 
+    this.loadCars();
+  }
+
+  loadCars() {
+    this.loading = true;
     this.carService.getCars().subscribe((cars: Car[]) => {
       this.cars = cars;
-    })
+      this.loading = false;
+    });
   }
 
   saveCarForm() {
-    const dataCar: Car = this.formCar.value;
+    const dataCar: Car = {
+      id: this.atualIndex,
+      brand: this.formCar.value.brand,
+      model: this.formCar.value.model,
+      year: Number(this.formCar.value.year),
+      price: Number(this.formCar.value.price),
+      mileage: Number(this.formCar.value.mileage),
+      fuel: this.formCar.value.fuel,
+      engine: this.formCar.value.engine,
+      transmission: this.formCar.value.transmission,
+      drive: this.formCar.value.drive,
+      color: this.formCar.value.color,
+    }
+
     if (!this.isEdit) {
-      this.carService.postCar(dataCar).subscribe((car: Car) => {
-        this.cars.push(car);
+      this.carService.postCar(dataCar).subscribe((id: string) => {
+        if (id) {
+          this.loadCars();
+        } else { }
       }
       );
-      return
+      return;
     }
-    dataCar.id = this.cars[this.atualIndex].id;
-    this.carService.putCar(dataCar).subscribe((car: Car) => {
-
-      const index = this.cars.findIndex((c: Car) => c.id === car.id);
-      this.cars[index] = car;
+    // dataCar.id = this.cars[this.atualIndex].id;
+    // debugger
+    this.carService.putCar(dataCar).subscribe(() => {
+      this.loadCars();
     }
     );
   }
 
-  deleteCar(i: number) {
-    this.carService.deleteCar(this.cars[i].id).subscribe((res: Car) => {
-      console.log(res);
-    })
-    this.cars.splice(i, 1);
+  deleteCar(i: string | undefined) {
+    if (i) {
+      this.carService.deleteCar(i).subscribe(() => {
+        this.loadCars();
+      });
+    }
   }
 
-  editCar(i: number) {
-    this.atualIndex = i;
-    this.isEdit = true;
-    this.fillForm(this.cars[i])
+  editCar(i: string | undefined) {
+    if (i) {
+      this.carService.getCar(i).subscribe((car: Car) => {
+        this.isEdit = true;
+        this.atualIndex = car.id;
+        this.fillForm(car);
+      });
+    }
   }
 
   addCar() {
@@ -130,8 +156,8 @@ export class HomeComponent implements OnInit {
       transmission: data.transmission,
       drive: data.drive,
       color: data.color,
-      img: data.img,
     })
+
   }
 
   onFileSelected(event: any) {

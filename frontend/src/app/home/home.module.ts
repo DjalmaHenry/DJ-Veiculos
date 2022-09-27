@@ -8,6 +8,7 @@ import { MatSelectModule } from '@angular/material/select';
 
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { CarDetailsComponent } from './car-details/car-details.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -24,7 +25,7 @@ const maskConfig: Partial<IConfig> = {
     MatIconModule,
     FormsModule,
     ReactiveFormsModule,
-    MatSelectModule,
+    MatProgressSpinnerModule,
     NgxMaskModule.forRoot(maskConfig)
   ]
 })

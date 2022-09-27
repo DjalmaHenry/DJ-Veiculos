@@ -1,5 +1,5 @@
 export interface Car {
-    id?: number;
+    id?: string;
     brand: string; // Marca
     model: string; // Modelo
     year: number; // Ano
@@ -10,5 +10,4 @@ export interface Car {
     transmission: string; // Câmbio
     drive: string; // Tração
     color: string; // Cor
-    img?: any; // Imagem
 }

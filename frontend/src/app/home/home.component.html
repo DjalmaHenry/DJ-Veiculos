@@ -1,4 +1,8 @@
-<div class="container-fluid mt-3">
+<div *ngIf="this.loading" class="d-flex justify-content-center align-items-center spinner-custom">
+
+  <mat-spinner></mat-spinner>
+</div>
+<div *ngIf="!this.loading" class="container-fluid mt-3">
   <div class="card-body text-center mt-2 add-component">
     <button type="button" class="btn-custom pointer" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
       (click)="addCar()">
@@ -16,16 +20,17 @@
               <p class="card-subtitle mb-2 fs-5">{{ car.model }}</p>
               <p class="fs-6">Preço</p>
               <p class="fs-6">R${{ car.price | mask: '00.000|000.000|0.000.0000|00.000.000 '}}</p>
-              <button (click)="deleteCar(i)" class="btn-custom mr-3">
+              <button (click)="deleteCar(car.id)" class="btn-custom mr-3">
                 <i class="text-danger fa-solid fa-trash fa-xl pointer"></i>
               </button>
-              <button class="btn-custom" data-bs-toggle="modal" data-bs-target="#staticBackdrop" (click)="editCar(i)">
+              <button class="btn-custom" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                (click)="editCar(car.id)">
                 <i class="text-primary fa-solid fa-pencil fa-xl pointer"></i>
               </button>
             </div>
             <div class="col d-flex align-items-center">
               <div data-bs-toggle="modal" data-bs-target="#carDetails" (click)="fillCarDetails(i)" class="col pointer">
-                <img [src]="car.img" (error)="img.src = imgCarDefault" class="img-custom mr-5" alt="..." #img />
+                <img [src]="" (error)="img.src = imgCarDefault" class="img-custom mr-5" alt="..." #img />
               </div>
             </div>
           </div>
@@ -80,7 +85,7 @@
                 <div class="col text-center">
                   <mat-form-field class="input-custom-pb" appearance="outline">
                     <mat-label>Ano</mat-label>
-                    <input mask="0000" type="text" matInput placeholder="9999" formControlName="year" />
+                    <input mask="0000" type="number" matInput placeholder="9999" formControlName="year" />
                     <mat-error class="mt-1 mb-1" class="mt-1 mb-1" *ngIf="
                         !formCar.hasError('required')
                         ">
@@ -91,8 +96,7 @@
                 <div class="col text-center">
                   <mat-form-field class="input-custom-pb" appearance="outline">
                     <mat-label>Preço</mat-label>
-                    <input prefix="R$" mask="000000000" type="text" matInput placeholder="R$55"
-                      formControlName="price" />
+                    <input type="number" matInput placeholder="R$55" formControlName="price" />
                     <mat-error class="mt-1 mb-1" *ngIf="
                         !formCar.hasError('required')
                         ">
@@ -103,7 +107,7 @@
                 <div class="col text-center">
                   <mat-form-field class="input-custom-pb" appearance="outline">
                     <mat-label>Quilometragem</mat-label>
-                    <input type="text" matInput placeholder="1000Km" formControlName="mileage" />
+                    <input type="number" matInput placeholder="1000Km" formControlName="mileage" />
                     <mat-error class="mt-1 mb-1" *ngIf="
                           !formCar.hasError('required')
                         ">
@@ -170,19 +174,19 @@
 
                   <div class="col text-center">
                     <input (change)="onFileSelected($event)" class="d-none" id="uploadImg" type="file" />
-                    <button type="button" class="btn btn-primary" (click)="changeAvatar()">{{formCar.get('img').value ?
-                      'Trocar imagem' : 'Adicionar imagem'}}</button>
+                    <!-- <button type="button" class="btn btn-primary" (click)="changeAvatar()">{{formCar.get('img').value ?
+                      'Trocar imagem' : 'Adicionar imagem'}}</button> -->
                     <label class="text-muted fw-light d-flex flex-column">Tamanho máximo: 1mb</label>
 
                   </div>
                 </div>
               </div>
-              <div class="row mt-2 " *ngIf="formCar.get('img').value">
+              <!-- <div class="row mt-2 " *ngIf="formCar.get('img').value">
                 <div class="col d-flex justify-content-center text-center">
                   <img [src]="formCar.get('img').value" alt="" class="img-custom rounded">
                 </div>
 
-              </div>
+              </div> -->
             </form>
           </div>
           <div class="modal-footer">
