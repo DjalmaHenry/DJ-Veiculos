@@ -76,15 +76,30 @@ export class HomeComponent implements OnInit {
       transmission: new FormControl('', [Validators.required]), // Câmbio
       drive: new FormControl('', [Validators.required]), // Tração
       color: new FormControl('', [Validators.required]), // Cor
+      img: new FormControl('', [Validators.required]), // Imagem
     });
 
     this.loadCars();
+    this.formCar.get('brand')?.valueChanges.subscribe((value: string) => {
+      this.formCar.patchValue({
+        img: `../../assets/img/cars/${value}.webp`
+      });
+    });
   }
 
-  loadCars() {
+  loadCars(id?: string) {
     this.loading = true;
     this.carService.getCars().subscribe((cars: Car[]) => {
       this.cars = cars;
+      if (!this.isEdit) {
+        this.cars.forEach((car: Car) => {
+          if (car.id === id) {
+            car.img = `../../assets/img/cars/${car.brand}.webp`;
+            console.log(car.img);
+
+          }
+        });
+      }
       this.loading = false;
     });
   }
@@ -94,9 +109,9 @@ export class HomeComponent implements OnInit {
       id: this.atualIndex,
       brand: this.formCar.value.brand,
       model: this.formCar.value.model,
-      year: Number(this.formCar.value.year),
-      price: Number(this.formCar.value.price),
-      mileage: Number(this.formCar.value.mileage),
+      year: this.formCar.value.year,
+      price: this.formCar.value.price,
+      mileage: this.formCar.value.mileage,
       fuel: this.formCar.value.fuel,
       engine: this.formCar.value.engine,
       transmission: this.formCar.value.transmission,
@@ -105,16 +120,15 @@ export class HomeComponent implements OnInit {
     }
 
     if (!this.isEdit) {
+      debugger
       this.carService.postCar(dataCar).subscribe((id: string) => {
-        if (id) {
-          this.loadCars();
-        } else { }
+
+        this.loadCars(id);
+
       }
       );
       return;
     }
-    // dataCar.id = this.cars[this.atualIndex].id;
-    // debugger
     this.carService.putCar(dataCar).subscribe(() => {
       this.loadCars();
     }
@@ -182,5 +196,14 @@ export class HomeComponent implements OnInit {
 
   fillCarDetails(index: number) {
     this.carDetailsActual = this.cars[index];
+  }
+
+  setImgCar() {
+    // if (this.formCar.get('brand')?.value) {
+    //   this.formCar.patchValue({
+    //     img: `../../assets/img/cars/${this.formCar.get('brand')?.value}.png`
+    //   });
+    // }
+
   }
 }
