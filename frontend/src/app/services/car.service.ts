@@ -22,11 +22,13 @@ export class CarService {
     return this.http.post<string>(`${environment.API}/showroom`, car);
   }
 
-  putCar(car: Car) {
-    return this.http.put(`${environment.API}/showroom/${car.id}`, car);
+  putCar(car: Car): Observable<void> {
+    return this.http.put<void>(`${environment.API}/showroom/${car.id}`, car);
   }
 
-  deleteCar(id: string) {
-    return this.http.delete(`${environment.API}/showroom/${id}`);
+  deleteCar(id: string): Observable<void> {
+    console.log(id);
+
+    return this.http.delete<void>(`${environment.API}/showroom/${id}`);
   }
 }

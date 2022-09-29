@@ -52,19 +52,9 @@
               <div class="row">
 
                 <div class="col text-center">
-                  <!-- <mat-form-field class="input-custom-pb mr-1" appearance="outline">
-                    <mat-label>Marca</mat-label>
-                    <input type="text" matInput placeholder="BMW" formControlName="brand" />
-                    <mat-error class="mt-1 mb-1" *ngIf="
-                          !formCar.hasError('required')
-                        ">
-                      Marca é obrigatória
-                    </mat-error>
-                  </mat-form-field> -->
-
                   <mat-form-field appearance="outline">
                     <mat-label>Marca</mat-label>
-                    <mat-select formControlName="brand" (valueChange)="setImgCar()">
+                    <mat-select formControlName="brand">
                       <mat-option *ngFor="let nameCar of this.nameCars" [value]="nameCar">{{nameCar.toUpperCase()}}
                       </mat-option>
                     </mat-select>
@@ -90,7 +80,7 @@
                 <div class="col text-center">
                   <mat-form-field class="input-custom-pb" appearance="outline">
                     <mat-label>Ano</mat-label>
-                    <input mask="0000" type="number" matInput placeholder="9999" formControlName="year" />
+                    <input mask="0000" type="text" matInput placeholder="9999" formControlName="year" />
                     <mat-error class="mt-1 mb-1" class="mt-1 mb-1" *ngIf="
                         !formCar.hasError('required')
                         ">

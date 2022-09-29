@@ -91,25 +91,19 @@ export class HomeComponent implements OnInit {
     this.loading = true;
     this.carService.getCars().subscribe((cars: Car[]) => {
       this.cars = cars;
-      if (!this.isEdit) {
-        this.cars.forEach((car: Car) => {
-          if (car.id === id) {
-            car.img = `../../assets/img/cars/${car.brand}.webp`;
-            console.log(car.img);
-
-          }
-        });
-      }
       this.loading = false;
+      this.cars.map((car: Car) => {
+        car.img = `../../assets/img/cars/${car.brand}.webp`;
+      });
     });
+
   }
 
   saveCarForm() {
     const dataCar: Car = {
-      id: this.atualIndex,
       brand: this.formCar.value.brand,
       model: this.formCar.value.model,
-      year: this.formCar.value.year,
+      year: Number(this.formCar.value.year),
       price: this.formCar.value.price,
       mileage: this.formCar.value.mileage,
       fuel: this.formCar.value.fuel,
@@ -120,10 +114,15 @@ export class HomeComponent implements OnInit {
     }
 
     if (!this.isEdit) {
-      debugger
       this.carService.postCar(dataCar).subscribe((id: string) => {
-
         this.loadCars(id);
+        // add img car in storage
+        this.cars.forEach((car: Car) => {
+          if (car.id === id) {
+            car.img = this.formCar.value.img;
+          }
+        }
+        );
 
       }
       );
@@ -138,6 +137,8 @@ export class HomeComponent implements OnInit {
   deleteCar(i: string | undefined) {
     if (i) {
       this.carService.deleteCar(i).subscribe(() => {
+        console.log("Car deleted");
+
         this.loadCars();
       });
     }
@@ -196,14 +197,5 @@ export class HomeComponent implements OnInit {
 
   fillCarDetails(index: number) {
     this.carDetailsActual = this.cars[index];
-  }
-
-  setImgCar() {
-    // if (this.formCar.get('brand')?.value) {
-    //   this.formCar.patchValue({
-    //     img: `../../assets/img/cars/${this.formCar.get('brand')?.value}.png`
-    //   });
-    // }
-
   }
 }
