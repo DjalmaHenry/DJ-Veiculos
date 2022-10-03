@@ -2,8 +2,8 @@
 
   <mat-spinner></mat-spinner>
 </div>
-<div *ngIf="!this.loading" class="container-fluid mt-3">
-  <div class="card-body text-center mt-2 add-component">
+<div *ngIf="this.loading" class="container-fluid mt-3">
+  <div class="card-body text-center mt-2 add-component" id="top-home">
     <button type="button" class="btn-custom pointer" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
       (click)="addCar()">
       <i class="fas fa-plus fa-6x pointer"></i>
@@ -192,5 +192,8 @@
 
     <!-- Modal  details-->
     <app-car-details [car]="this.carDetailsActual"></app-car-details>
+    <div class="link-top">
+      <a class="link-top-btn" href="#top-home"><i class="fa-solid fa-angle-up"></i></a>
+    </div>
   </div>
 </div>
