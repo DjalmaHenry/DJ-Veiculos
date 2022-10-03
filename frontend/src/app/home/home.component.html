@@ -1,0 +1,196 @@
+<div *ngIf="this.loading" class="d-flex justify-content-center align-items-center spinner-custom">
+
+  <mat-spinner></mat-spinner>
+</div>
+<div *ngIf="!this.loading" class="container-fluid mt-3">
+  <div class="card-body text-center mt-2 add-component">
+    <button type="button" class="btn-custom pointer" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+      (click)="addCar()">
+      <i class="fas fa-plus fa-6x pointer"></i>
+      <h3 class="fw-bold mb-0 pointer">Adicionar carro</h3>
+    </button>
+  </div>
+  <div class="row">
+    <div *ngFor="let car of cars; index as i" class="col-lg-4 d-flex justify-content-center">
+      <div class="card mb-2 " style="width: 20rem">
+        <div class="card-body">
+          <div class="row">
+            <div class="col">
+              <p class="card-title fs-6">{{ car.brand }}</p>
+              <p class="card-subtitle mb-2 fs-5">{{ car.model }}</p>
+              <p class="fs-6">Preço</p>
+              <p class="fs-6">R${{ car.price | mask: '00.000|000.000|0.000.0000|00.000.000 '}}</p>
+              <button (click)="deleteCar(car.id)" class="btn-custom mr-3">
+                <i class="text-danger fa-solid fa-trash fa-xl pointer"></i>
+              </button>
+              <button class="btn-custom" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                (click)="editCar(car.id)">
+                <i class="text-primary fa-solid fa-pencil fa-xl pointer"></i>
+              </button>
+            </div>
+            <div class="col d-flex align-items-center">
+              <div data-bs-toggle="modal" data-bs-target="#carDetails" (click)="fillCarDetails(i)" class="col pointer">
+                <img [src]="car.img" (error)="img.src = imgCarDefault" class="img-custom mr-5" alt="..." #img />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- formulário modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title mb-0" id="staticBackdropLabel">Adição de carro</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form novalidate [formGroup]="formCar">
+              <div class="row">
+
+                <div class="col text-center">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Marca</mat-label>
+                    <mat-select formControlName="brand">
+                      <mat-option *ngFor="let nameCar of this.nameCars" [value]="nameCar">{{nameCar.toUpperCase()}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="
+                          !formCar.hasError('required')
+                        ">
+                      Marca é obrigatória
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col text-center">
+
+                  <mat-form-field class="input-custom-pb" appearance="outline">
+                    <mat-label>Modelo</mat-label>
+                    <input type="text" matInput placeholder="A4" formControlName="model" />
+                    <mat-error class="mt-1 mb-1" *ngIf="
+                              !formCar.hasError('required')
+                            ">
+                      Modelo obrigatório
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col text-center">
+                  <mat-form-field class="input-custom-pb" appearance="outline">
+                    <mat-label>Ano</mat-label>
+                    <input mask="0000" type="text" matInput placeholder="9999" formControlName="year" />
+                    <mat-error class="mt-1 mb-1" class="mt-1 mb-1" *ngIf="
+                        !formCar.hasError('required')
+                        ">
+                      Ano obrigatório
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col text-center">
+                  <mat-form-field class="input-custom-pb" appearance="outline">
+                    <mat-label>Preço</mat-label>
+                    <input type="number" matInput placeholder="R$55" formControlName="price" />
+                    <mat-error class="mt-1 mb-1" *ngIf="
+                        !formCar.hasError('required')
+                        ">
+                      Preço obrigatório
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col text-center">
+                  <mat-form-field class="input-custom-pb" appearance="outline">
+                    <mat-label>Quilometragem</mat-label>
+                    <input type="number" matInput placeholder="1000Km" formControlName="mileage" />
+                    <mat-error class="mt-1 mb-1" *ngIf="
+                          !formCar.hasError('required')
+                        ">
+                      Quilometragem obrigatória
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col text-center">
+                  <mat-form-field class="input-custom-pb" appearance="outline">
+                    <mat-label>Combustível</mat-label>
+                    <input type="text" matInput placeholder="Flex" formControlName="fuel" />
+                    <mat-error class="mt-1 mb-1" *ngIf="
+                          !formCar.hasError('required')
+                        ">
+                      Combustível é obrigatório
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col text-center">
+                  <mat-form-field class="input-custom-pb" appearance="outline">
+                    <mat-label>Motor</mat-label>
+                    <input type="text" matInput placeholder="1.0" formControlName="engine" />
+                    <mat-error class="mt-1 mb-1" *ngIf="
+                          !formCar.hasError('required')
+                        ">
+                      Motor é obrigatório
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col text-center">
+                  <mat-form-field class="input-custom-pb" appearance="outline">
+                    <mat-label>Cambio</mat-label>
+                    <input type="text" matInput placeholder="Automático" formControlName="transmission" />
+                    <mat-error class="mt-1 mb-1" *ngIf="
+                          !formCar.hasError('required')
+                        ">
+                      Cambio é obrigatório
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col text-center">
+                  <mat-form-field class="input-custom-pb" appearance="outline">
+                    <mat-label>Tração</mat-label>
+                    <input type="text" matInput placeholder="Traseira" formControlName="drive" />
+                    <mat-error class="mt-1 mb-1" *ngIf="
+                          !formCar.hasError('required')
+                        ">
+                      Tração é obrigatório
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col text-center">
+                  <mat-form-field class="input-custom-pb" appearance="outline">
+                    <mat-label>Cor</mat-label>
+                    <input type="text" matInput placeholder="Azul" formControlName="color" />
+                    <mat-error class="mt-1 mb-1" *ngIf="
+                          !formCar.hasError('required')
+                        ">
+                      Cor é obrigatório
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="row">
+
+                  <div class="col text-center">
+                    <input (change)="onFileSelected($event)" class="d-none" id="uploadImg" type="file" />
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-2 " *ngIf="formCar.get('img').value">
+                <div class="col d-flex justify-content-center text-center">
+                  <img [src]="formCar.get('img').value" alt="" class="img-custom rounded">
+                </div>
+
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            <button [disabled]="!formCar.valid" (click)="saveCarForm()" data-bs-dismiss="modal" class="btn btn-primary">
+              Salvar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal  details-->
+    <app-car-details [car]="this.carDetailsActual"></app-car-details>
+  </div>
+</div>
