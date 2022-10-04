@@ -182,7 +182,10 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-            <button [disabled]="!formCar.valid" (click)="saveCarForm()" data-bs-dismiss="modal" class="btn btn-primary">
+            <button [disabled]="!formCar.valid" (click)="saveCarForm()" data-bs-dismiss="modal" class="btn btn-primary" *ngIf="!isEdit">
+              Salvar
+            </button>
+            <button [disabled]="!formCar.valid" (click)="saveEditCarForm()" data-bs-dismiss="modal" class="btn btn-primary" *ngIf="isEdit">
               Salvar
             </button>
           </div>

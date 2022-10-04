@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
   isEdit: boolean = false;
 
   formCar: FormGroup | any;
+  selectedCar!: string;
 
   atualIndex: any
 
@@ -113,20 +114,33 @@ export class HomeComponent implements OnInit {
       color: this.formCar.value.color,
     }
 
-    if (!this.isEdit) {
-      this.carService.postCar(dataCar).subscribe((id: string) => {
-        this.loadCars(id);
-        // add img car in storage
-        this.cars.forEach((car: Car) => {
-          if (car.id === id) {
-            car.img = this.formCar.value.img;
-          }
+    this.carService.postCar(dataCar).subscribe((id: string) => {
+      this.loadCars(id);
+      // add img car in storage
+      this.cars.forEach((car: Car) => {
+        if (car.id === id) {
+          car.img = this.formCar.value.img;
         }
-        );
-
       }
       );
-      return;
+
+    }
+    );
+  }
+
+  saveEditCarForm() {
+    const dataCar: Car = {
+      id: this.selectedCar,
+      brand: this.formCar.value.brand,
+      model: this.formCar.value.model,
+      year: Number(this.formCar.value.year),
+      price: this.formCar.value.price,
+      mileage: this.formCar.value.mileage,
+      fuel: this.formCar.value.fuel,
+      engine: this.formCar.value.engine,
+      transmission: this.formCar.value.transmission,
+      drive: this.formCar.value.drive,
+      color: this.formCar.value.color,
     }
     this.carService.putCar(dataCar).subscribe(() => {
       this.loadCars();
@@ -149,7 +163,7 @@ export class HomeComponent implements OnInit {
       this.carService.getCar(i).subscribe((car: Car) => {
         this.isEdit = true;
         this.atualIndex = car.id;
-        this.fillForm(car);
+        this.fillForm(car, i);
       });
     }
   }
@@ -159,7 +173,7 @@ export class HomeComponent implements OnInit {
     this.formCar.reset()
   }
 
-  fillForm(data: Car) {
+  fillForm(data: Car, id: string) {
     this.formCar.patchValue({
       brand: data.brand,
       model: data.model,
@@ -171,7 +185,9 @@ export class HomeComponent implements OnInit {
       transmission: data.transmission,
       drive: data.drive,
       color: data.color,
-    })
+    });
+
+    this.selectedCar = id;
 
   }
 
